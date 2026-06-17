@@ -12,6 +12,7 @@ outputs:
     description: "Random number"
     value: ${{ steps.random-number-generator.outputs.random-id }}
 
+
 runs:
   using: "composite"
   steps:
@@ -19,5 +20,6 @@ runs:
       shell: bash
 
     - id: random-number-generator
-  run: echo "random-id=$(echo $RANDOM)" >> $GITHUB_OUTPUT
-  shell: bash
+      run: echo "random-id=$(echo $RANDOM)" >> $GITHUB_OUTPUT
+      shell: bash
+
