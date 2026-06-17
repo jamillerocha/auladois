@@ -1,6 +1,6 @@
 name: jobs examples
 
-on: push
+on: workflow_dispatch
 
 jobs:
   build:
@@ -15,12 +15,16 @@ jobs:
           path: build-result.txt
 
   deploy:
+    if: contains(github.event.head_commit.message, '[deploy]')
     runs-on: ubuntu-latest
     needs: build
     steps:
       - uses: actions/download-artifact@v4
         with:
           name: build-result
+
+      - name: use of artifact created
+        run: ls
 
       - name: use of artifact created
         run: ls
